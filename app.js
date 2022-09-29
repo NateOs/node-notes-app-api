@@ -1,4 +1,6 @@
+require('dotenv').config()
 const express = require("express");
+const connectDB = require('./db/connect')
 
 const app = express();
 
@@ -12,10 +14,20 @@ app.get("/", (req, res) => {
     );
 });
 
-app.listen(
-  port,
-  console.log(
-    "Note app listening on port " +
-      port,
-  ),
-);
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGODB_URI)
+    app.listen( port,
+      console.log(
+        "Note app listening on port " +
+          port,
+      ),
+    );
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+start()
+
+
