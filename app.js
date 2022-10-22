@@ -28,7 +28,7 @@ const start = async () => {
   }
 };
 
-// extra middleware, placed here so that it runs
+// extra middleware, placed here so that it runs 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 

@@ -12,8 +12,15 @@ const createNote = async (req, res) => {
 };
 
 // Get a single note
-const getNote = (req, res) => {
-  res.send("get a single note");
+const getNote = async (req, res) => {
+  const { id: noteId } = req.params;
+
+  const note = await Note.find({ _id: noteId });
+
+  if (note.length === 0) {
+    throw new Error(`Note not found`);
+  }
+  res.status(200).json(note);
 };
 
 // Deleting a note
