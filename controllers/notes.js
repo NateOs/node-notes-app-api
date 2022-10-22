@@ -37,8 +37,18 @@ const deleteNote = async (req, res) => {
 };
 
 // Update a note
-const updateNote = (req, res) => {
-  res.send("update note");
+const updateNote = async (req, res) => {
+  const { id: noteId } = req.params;
+  const note = await Note.findOneAndUpdate({ _id: noteId }, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({ note, msg: "note updated successfully" });
+
+  if (!note) {
+    throw new Error("note not found");
+  }
 };
 
 module.exports = {
