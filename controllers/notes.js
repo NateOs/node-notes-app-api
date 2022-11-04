@@ -51,10 +51,24 @@ const updateNote = async (req, res) => {
   }
 };
 
+// Login a user
+const login = async (req, res) => {
+  const userInfo = req.body;
+  await console.log(userInfo);
+  res.send("login success");
+};
+
+// Logout a user
+const logout = async (req, res) => {
+  res.send("logout");
+};
+
 module.exports = {
   getAllNotes,
   createNote,
   getNote,
   deleteNote,
   updateNote,
+  login,
+  logout,
 };
